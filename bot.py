@@ -34,7 +34,7 @@ async def bot_check(bot_username):
         async for message in app.get_chat_history(bot_username, limit=1):
             second_message_id = message.id
         if first_message_id == second_message_id:
-            status = f"\n\n🤖- {bot_username} ❌ Dead !"
+            status = f"\n\n🤖- @{bot_username} ❌ Dead !"
             for bot_admin_id in BOT_ADMIN_IDS:
                 if bot_admin_id.isnumeric():
                     bot_admin_id = int(bot_admin_id)
@@ -43,7 +43,7 @@ async def bot_check(bot_username):
                 except Exception as e:
                     print(e)
         else:
-            status = f"\n\n🤖- {bot_username} ✅ Online !"
+            status = f"\n\n🤖- @{bot_username} ✅ Online !"
         await app.read_chat_history(bot_username)
         return status
     except FloodWait as e:
@@ -51,12 +51,13 @@ async def bot_check(bot_username):
 
 
 async def status_checker():
-    message = f"🔗 Welcome to Demon Bot's Status Channel\n\n🔗 This is live status of all Demon Bots. This Message keeps on updating in every {CHECK_DELAY/60} mins with live status of all Demon Bots whether they are live or offline.\n\n"
+    message = f"🔗 Welcome to Demon Bot's Status Channel\n\n🔗 This is live status of all Demon Bots. This Message keeps on updating in every {CHECK_DELAY/60} mins with live status of all Demon Bots whether they are live or offline.\n"
     for bot in BOT_LIST:
         message += await bot_check(bot)
     time = datetime.datetime.now(pytz.timezone(f"{TIME_ZONE}"))
-    last_update = time.strftime("%d %b %Y at %I:%M %p")
-    message += f"\n\n__Last Checked On:\n\n{last_update}.\n\n{TIME_ZONE}.\n\n "
+    last_update0 = time.strftime("%d %b %Y")
+    last_update1 = time.strftime("%I:%M %p")
+    message += f"\n\n__Last Checked On:__\nDate: {last_update}.\nTime: {last_update1}"
     await app.edit_message_text(int(CHANNEL_OR_GROUP_ID), MESSAGE_ID, message)
     print(f"Last Check: {last_update}")
                         
