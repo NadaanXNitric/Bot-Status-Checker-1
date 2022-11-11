@@ -51,7 +51,7 @@ async def bot_check(bot_username):
 
 
 async def status_checker():
-    message = f"🔗 Welcome to Demon Bot's Status Channel\n\n🔗 This is live status of all Demon Bots. This Message keeps on updating in every {CHECK_DELAY/60} mins with live status of all Demon Bots whether they are live or offline.\n"
+    message = f"**🔗 Welcome to Demon Bot's Status Channel**\n\n🔗 This is live status of all Demon Bots. This Message keeps on updating in every **3 mins** with live status of all Demon Bots whether they are **live** or **offline**.\n"
     for bot in BOT_LIST:
         message += await bot_check(bot)
     time = datetime.datetime.now(pytz.timezone(f"{TIME_ZONE}"))
