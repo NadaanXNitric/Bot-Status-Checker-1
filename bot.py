@@ -59,7 +59,7 @@ async def status_checker():
     last_update1 = time.strftime("%I:%M %p")
     message += f"\n\n**__Last Checked On:__**\nDate: {last_update0}\nTime: {last_update1}"
     await app.edit_message_text(int(CHANNEL_OR_GROUP_ID), MESSAGE_ID, message)
-    print(f"Last Check: {last_update}")
+    print(f"Last Check: {last_update1}")
                         
 async def main():
     await app.start()
